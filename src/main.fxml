@@ -2,7 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -17,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane id="split-pane" dividerPositions="0.386041439476554" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="953.0" styleClass="split-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane id="split-pane" dividerPositions="0.386041439476554" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="953.0" styleClass="split-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
       <FlowPane maxWidth="350.0" minWidth="350.0" prefHeight="200.0" prefWidth="200.0" styleClass="main-container" stylesheets="@App.css">
          <children>
@@ -35,10 +34,10 @@
                   </Text>
                </children>
             </FlowPane>
-            <GridPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="188.0" prefWidth="247.0" styleClass="form-container">
+            <GridPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="188.0" prefWidth="293.0" styleClass="form-container">
                <columnConstraints>
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="91.0" minWidth="10.0" prefWidth="33.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="168.0" minWidth="10.0" prefWidth="167.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="91.0" minWidth="10.0" prefWidth="61.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="198.0" minWidth="10.0" prefWidth="198.0" />
                   
                            </columnConstraints>
                <rowConstraints>
@@ -49,17 +48,15 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                </rowConstraints>
                <children>
-                  <TextField prefHeight="59.0" prefWidth="215.0" styleClass="text-field" GridPane.columnIndex="1" />
-                  <TextField styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField editable="false" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField editable="false" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="220.0" styleClass="submit-button" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Job Title" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Company" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desciption" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Link" GridPane.rowIndex="3" />
+                  <TextField prefHeight="59.0" prefWidth="215.0" promptText="Software Engineer" styleClass="text-field" GridPane.columnIndex="1" />
+                  <TextField promptText="Google" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField promptText="At Google, we are looking for..." styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField promptText="https://careers.google.com/..." styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button defaultButton="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="198.0" styleClass="submit-button" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-title" text="Job Title" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-title" text="Company" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-title" text="Description" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-title" text="Link" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>
@@ -68,33 +65,10 @@
          <children>
             <TabPane prefHeight="587.0" prefWidth="595.0" styleClass="plain" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab text="All">
-                     <content>
-                        <AnchorPane minHeight="0.0" prefHeight="550.0" prefWidth="618.0">
-                           <children>
-                              <Label layoutX="22.0" layoutY="14.0" text=".plain" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Rejected">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0">
-                           <children>
-                              <Label layoutX="123.0" layoutY="26.0" text="tab 2" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Accepted">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0">
-                           <children>
-                              <Label layoutX="123.0" layoutY="26.0" text="tab 2" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
+                  <Tab text="All Applications" />
+                  <Tab text="Interview" />
+                  <Tab text="Accepted" />
+                  <Tab text="Rejected" />
                </tabs>
             </TabPane>
          </children>

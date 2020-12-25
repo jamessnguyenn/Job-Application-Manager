@@ -22,6 +22,33 @@
 .split-pane{
     -fx-padding: 0;
 }
-.text-field{
-
+.text-title{
+    -fx-fill:#EEFBFB;
+    -fx-font-weight: bold;
+}
+.submit-button{
+    -fx-background-color:#203647;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.submit-button:hover{
+    -fx-background-color: #233b4d;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.submit-button:pressed{
+    -fx-background-color:#32546d;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
 }
