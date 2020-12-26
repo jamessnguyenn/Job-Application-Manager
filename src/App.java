@@ -26,12 +26,15 @@ public class App extends Application {
 		SplitPane form = (SplitPane) mainScene.lookup("#split-pane");
 		form.lookupAll(".split-pane-divider").stream()
 		.forEach(div -> div.setMouseTransparent(true));
+		ResumeSQLHelper db = new ResumeSQLHelper();
+		db.connect();
 				
 	}
 	public static void main(String[] args) {
 		launch(args);
+		
 	}
-	
+	 
 	
 
 }
