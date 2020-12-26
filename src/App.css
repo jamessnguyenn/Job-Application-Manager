@@ -54,6 +54,10 @@
 }
 .all-label,.interview-label, .accepted-label, .rejected-label, .applied-label{
     -fx-font-weight:bold;
+    -fx-font-size: 15px;
+}
+.all-label,.interview-label, .accepted-label, .rejected-label, .applied-label:hover{
+    -fx-cursor:hand;
 }
 
 .tab-pane .tab-header-area .tab:selected{
@@ -66,4 +70,6 @@
  }
  .scroll-pane {
     -fx-background-color: transparent;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
  }

@@ -448,7 +448,7 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .tab-pane .tab-header-area .tab .tab-label {
-	-fx-text-fill: #337ab7;
+	-fx-text-fill:  #007CC7;
 }
 
 .tab-pane .tab-header-area .tab:hover {
