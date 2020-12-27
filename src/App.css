@@ -52,16 +52,17 @@
     -fx-border-color:transparent;
     -fx-background-radius: 15px;
 }
-.all-label,.interview-label, .accepted-label, .rejected-label, .applied-label{
-    -fx-font-weight:bold;
+.tab{
     -fx-font-size: 15px;
 }
-.all-label,.interview-label, .accepted-label, .rejected-label, .applied-label:hover{
+.tab:hover{
     -fx-cursor:hand;
+    
 }
 
 .tab-pane .tab-header-area .tab:selected{
     -fx-border-width: 4 0 0 0;
+    -fx-font-weight:bold;
     -fx-border-radius:null;
     -fx-border-color: #12232E #dddddd white #dddddd;
 }
@@ -73,3 +74,13 @@
     -fx-fit-to-width: true;
     -fx-fit-to-height: true;
  }
+.application-container{
+
+}
+.track-title{
+    -fx-font-size:30px;
+    
+}
+.place-holder{
+    -fx-font-size:25px;
+}

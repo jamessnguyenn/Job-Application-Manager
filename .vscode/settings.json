@@ -9,6 +9,7 @@
         "c:\\Program Files\\Java\\javafx-sdk-11.0.2\\lib\\javafx.swing.jar",
         "c:\\Program Files\\Java\\javafx-sdk-11.0.2\\lib\\javafx.web.jar",
         "c:\\Program Files\\Java\\javafx-sdk-11.0.2\\lib\\javafx-swt.jar",
-        "c:\\Program Files\\Java\\sqlite-jdbc-3.14.2\\sqlite-jdbc-3.14.2.jar"
+        "c:\\Program Files\\Java\\sqlite-jdbc-3.14.2\\sqlite-jdbc-3.14.2.jar",
+        "c:\\Program Files\\Java\\jfoenix-9.0.10\\jfoenix-9.0.10.jar"
     ]
 }

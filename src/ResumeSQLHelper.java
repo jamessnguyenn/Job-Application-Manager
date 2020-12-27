@@ -1,24 +1,55 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ResumeSQLHelper {
-    
-    public void connect(){
-        Connection conn = null;
+    private static final String CREATE_SQL= "CREATE TABLE if not exists Applications(job_title text, company text, description text, link text, current_date Date primary key);";
+    private Connection conn;
+    public ResumeSQLHelper(){
         try{
             System.out.println("Starting Connection to Database..");
             String url = "jdbc:sqlite:src/applications.db";
             conn = DriverManager.getConnection(url);
             System.out.println("Connection established");
-            Statement stmt = conn.createStatement();
-            String sql = "CREATE TABLE Applications(id int primary key);";
-            stmt.executeUpdate(sql);
-            stmt.close();
-
         }catch(SQLException e){
             System.out.println(e.getMessage());
+            System.out.println("Connection unsucessful");
         }
+    }
+    
+    public void createTable(){
+        try { 
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(CREATE_SQL);
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+       
+    }
+    public void insertIntoTable(String jobTitle, String company, String description, String link){
+       
+        try {
+            PreparedStatement insertStmt = conn.prepareStatement("Insert into Applications values(?, ?, ?, ?, DateTime('now'));");
+            insertStmt.setString(1, jobTitle);
+            insertStmt.setString(2,company);
+            insertStmt.setString(3, description);
+            insertStmt.setString(4, link);
+            insertStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    public void deleteFromTable(String date){
+
+    }
+
+    public void clearDatabase(String date){
+
     }
 }

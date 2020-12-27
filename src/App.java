@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class App extends Application {
 
@@ -15,8 +14,8 @@ public class App extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 		Scene mainScene= new Scene(root);
 		primaryStage.setScene(mainScene);
-		//primaryStage.setMaximized(true);
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.setMaximized(true);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		primaryStage.setX(primaryScreenBounds.getMinX());
 		primaryStage.setY(primaryScreenBounds.getMinY());
@@ -27,8 +26,8 @@ public class App extends Application {
 		form.lookupAll(".split-pane-divider").stream()
 		.forEach(div -> div.setMouseTransparent(true));
 		ResumeSQLHelper db = new ResumeSQLHelper();
-		db.connect();
-				
+		db.createTable();
+		db.insertIntoTable("Software Intern", "Google", "ksldfllkdafjlkdsafjlkdajflkdsajflkdafjlkdajfladjflkdasfjlkadjfkajflkdajflkdajflkdajflkdajfl", "www.google.com");
 	}
 	public static void main(String[] args) {
 		launch(args);
