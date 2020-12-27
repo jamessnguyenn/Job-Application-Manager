@@ -75,11 +75,12 @@
                      <content>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="application-container">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="track-title" text="Track Your Status">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="track-title" text="Track Your Status" textAlignment="CENTER" wrappingWidth="229.423828125">
                                  <VBox.margin>
                                     <Insets top="10.0" />
-                                 </VBox.margin></Text>
-                              <ImageView fitHeight="138.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
+                                 </VBox.margin>
+                              </Text>
+                              <ImageView fitHeight="110.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@resources/application.png" />
                                  </image>
@@ -87,43 +88,52 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                              <HBox alignment="BASELINE_RIGHT" prefHeight="32.0" prefWidth="841.0">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" styleClass="search-container">
+                                    <HBox alignment="CENTER_LEFT" styleClass="search-container" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
-                                          <ComboBox prefWidth="101.0">
+                                          <ComboBox prefWidth="103.0" promptText="Any">
                                              <HBox.margin>
-                                                <Insets />
+                                                <Insets left="10.0" />
                                              </HBox.margin></ComboBox>
                                        </children>
                                        <HBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </HBox>
-                                    <HBox styleClass="search-container">
+                                    <HBox alignment="CENTER_RIGHT" styleClass="search-container" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <TextField promptText="Search" />
+                                          <TextField prefHeight="27.0" prefWidth="274.0" promptText="Search by Company or Title" />
                                        </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
                                     </HBox>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" top="10.0" />
+                                 </padding>
                               </HBox>
-                              <JFXTreeTableView id="all-table" VBox.vgrow="ALWAYS">
+                              <JFXTreeTableView id="application-table" fx:id="application_table" VBox.vgrow="ALWAYS">
                                  <placeholder>
-                                    <ImageView fitHeight="152.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true" styleClass="landing-image">
+                                    <ImageView fitHeight="192.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" styleClass="landing-image">
                                           <image>
                                              <Image url="@resources/search.png" />
                                           </image>
                                        </ImageView>
                                  </placeholder>
                                  <columns>
-                                    <TreeTableColumn prefWidth="220.0" text="Job Title" />
-                                    <TreeTableColumn prefWidth="189.0" text="Company" />
-                                    <TreeTableColumn prefWidth="206.0" text="Status" />
-                                    <TreeTableColumn prefWidth="220.0" text="Date Applied" />
+                                    <TreeTableColumn prefWidth="${application_table.width * 0.35}" resizable="false" styleClass="title-column" text="Job Title" />
+                                    <TreeTableColumn prefWidth="${application_table.width * 0.35}" resizable="false" styleClass="company-column" text="Company" />
+                                    <TreeTableColumn prefWidth="${application_table.width * 0.15}" resizable="false" styleClass="status-column" text="Status" />
+                                    <TreeTableColumn prefWidth="${application_table.width * 0.15}" resizable="false" styleClass="date-column" text="Date Applied" />
                                  </columns>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                    <Insets bottom="10.0" left="15.0" right="15.0" />
                                  </VBox.margin>
                               </JFXTreeTableView>
                            </children>
@@ -132,11 +142,11 @@
                   </ScrollPane>
                </content>
             </Tab>
-            <Tab text="Interview Notes">
+            <Tab text="Interviews">
                <content>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="scroll-pane">
                      <content>
-                        <FlowPane />
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
                      </content></ScrollPane>
                </content>
             </Tab>
@@ -144,7 +154,7 @@
                <content>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="scroll-pane">
                      <content>
-                        <FlowPane />
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
                      </content></ScrollPane>
                </content>
             </Tab>

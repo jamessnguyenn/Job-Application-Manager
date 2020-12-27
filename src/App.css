@@ -74,11 +74,8 @@
     -fx-fit-to-width: true;
     -fx-fit-to-height: true;
  }
-.application-container{
-
-}
 .track-title{
-    -fx-font-size:30px;
+    -fx-font-size:25px;
     
 }
 .place-holder{
