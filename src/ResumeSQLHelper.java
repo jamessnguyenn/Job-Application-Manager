@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ResumeSQLHelper {
-    private static final String CREATE_SQL= "CREATE TABLE if not exists Applications(job_title text, company text, description text, link text, current_date Date primary key);";
+    private static final String CREATE_SQL= "CREATE TABLE if not exists Applications(job_title text, company text, description text, link text, status text,current_date Date primary key);";
     private Connection conn;
     public ResumeSQLHelper(){
         try{
@@ -33,7 +33,7 @@ public class ResumeSQLHelper {
     public void insertIntoTable(String jobTitle, String company, String description, String link){
        
         try {
-            PreparedStatement insertStmt = conn.prepareStatement("Insert into Applications values(?, ?, ?, ?, DateTime('now'));");
+            PreparedStatement insertStmt = conn.prepareStatement("Insert into Applications values(?, ?, ?, ?, 'pending', DateTime('now'));");
             insertStmt.setString(1, jobTitle);
             insertStmt.setString(2,company);
             insertStmt.setString(3, description);

@@ -5,12 +5,12 @@
 }
 .main-container{
     -fx-alignment: top-center;
-    -fx-vgap:25px;
+   
     -fx-background-color: #007CC7;
 }
 .form-container{
+    -fx-vgap:10px;
     -fx-alignment: center;
-    -fx-vgap: 10px;
 }
 .landing-image{
     -fx-background-color: transparent;
