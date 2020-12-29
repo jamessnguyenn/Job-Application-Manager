@@ -4,9 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ResumeSQLHelper {
-    private static final String CREATE_SQL= "CREATE TABLE if not exists Applications(job_title text, company text, description text, link text, status text,current_date Date primary key);";
+    private static final String CREATE_SQL= "CREATE TABLE if not exists Applications(job_title text, company text, description text, link text, status text, current_date Date primary key);";
     private Connection conn;
     public ResumeSQLHelper(){
         try{
@@ -51,5 +52,15 @@ public class ResumeSQLHelper {
 
     public void clearDatabase(String date){
 
+    }
+    public ResultSet getData(){
+        ResultSet rs = null;
+        try{
+            PreparedStatement selectStmt = conn.prepareStatement("Select * from Applications;");
+            rs = selectStmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rs;
     }
 }

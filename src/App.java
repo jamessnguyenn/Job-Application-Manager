@@ -1,3 +1,6 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.JFXTreeView;
@@ -48,6 +51,7 @@ public class App extends Application {
 	private Button submitButton;
 	private JFXTreeTableView<Data> treeTableView;
 	private TreeTableColumn<Data, String> jobTitle, company, status, dateApplied;
+	private ObservableList<Data> data;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -97,73 +101,85 @@ public class App extends Application {
 				descriptionField.clear();
 				linkField.clear();
 				db.insertIntoTable(title, company, description, link);
+				reloadData();
 			}
 
 		});
 
 	}
 
-	private void intializeTableElements(){
-			treeTableView = (JFXTreeTableView) mainScene.lookup("#application-table");
-			jobTitle = (TreeTableColumn<Data,String>) treeTableView.getColumns().get(0);
-			company = (TreeTableColumn<Data,String>)treeTableView.getColumns().get(1);
-			status = (TreeTableColumn<Data,String>)treeTableView.getColumns().get(2);
-			dateApplied = (TreeTableColumn<Data,String>) treeTableView.getColumns().get(3);
-			jobTitle.setResizable(false);
-			company.setResizable(false);
-			status.setResizable(false);
-			dateApplied.setResizable(false);
+	private void intializeTableElements() {
+		treeTableView = (JFXTreeTableView) mainScene.lookup("#application-table");
+		jobTitle = (TreeTableColumn<Data, String>) treeTableView.getColumns().get(0);
+		company = (TreeTableColumn<Data, String>) treeTableView.getColumns().get(1);
+		status = (TreeTableColumn<Data, String>) treeTableView.getColumns().get(2);
+		dateApplied = (TreeTableColumn<Data, String>) treeTableView.getColumns().get(3);
+		jobTitle.setResizable(false);
+		company.setResizable(false);
+		status.setResizable(false);
+		dateApplied.setResizable(false);
 	}
+
 	private void initializeTreeTable() {
 		treeTableView.lookupAll(".column-header").stream().forEach(header -> header.setMouseTransparent(true));
 
-		jobTitle.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Data,String>,ObservableValue<String>>(){
+		jobTitle.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<Data, String>, ObservableValue<String>>() {
 
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
-				return param.getValue().getValue().jobTitle;
-			}
-			
-		});
-		company.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Data,String>,ObservableValue<String>>(){
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
+						return param.getValue().getValue().jobTitle;
+					}
 
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
-				return param.getValue().getValue().company;
-			}
-			
-		});
-		status.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Data,String>,ObservableValue<String>>(){
+				});
+		company.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<Data, String>, ObservableValue<String>>() {
 
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
-				return param.getValue().getValue().status;
-			}
-			
-		});
-		dateApplied.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Data,String>,ObservableValue<String>>(){
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
+						return param.getValue().getValue().company;
+					}
 
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
-				return param.getValue().getValue().date;
-			}
-			
-		});
-		ObservableList<Data> data = FXCollections.observableArrayList();
-		data.add(new Data("Software Engadfadsdsineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
-		data.add(new Data("Software Engineer", "Google", "www.google.com", "At google we are looking for chicken", "Pending", "11-20-30"));
+				});
+		status.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<Data, String>, ObservableValue<String>>() {
 
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
+						return param.getValue().getValue().status;
+					}
+
+				});
+		dateApplied.setCellValueFactory(
+				new Callback<TreeTableColumn.CellDataFeatures<Data, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Data, String> param) {
+						return param.getValue().getValue().date;
+					}
+
+				});
+		data = FXCollections.observableArrayList();
+		reloadData();
 		TreeItem<Data> root = new RecursiveTreeItem<Data>(data, RecursiveTreeObject::getChildren);
 		treeTableView.setShowRoot(false);
 		treeTableView.setRoot(root);
-		
+
+	}
+
+	private void reloadData() {
+		data.clear();
+		ResultSet rs = db.getData();
+		if (rs == null) {
+			return;
+		}
+		try {
+			while (rs.next()) {
+				data.add(new Data(rs.getString("job_title"), rs.getString("company"), rs.getString("link"), rs.getString("description"), rs.getString("status"), rs.getString("current_date")));	
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	private class TextValidator implements javafx.beans.value.ChangeListener<String>{
 
