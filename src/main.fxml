@@ -158,10 +158,10 @@
                                        </ImageView>
                                  </placeholder>
                                  <columns>
-                                    <TreeTableColumn prefWidth="${application_table.width * 0.35}" resizable="false" styleClass="title-column" text="Job Title" />
-                                    <TreeTableColumn prefWidth="${application_table.width * 0.35}" resizable="false" styleClass="company-column" text="Company" />
-                                    <TreeTableColumn prefWidth="${application_table.width * 0.15}" resizable="false" styleClass="status-column" text="Status" />
-                                    <TreeTableColumn prefWidth="${application_table.width * 0.15}" resizable="false" styleClass="date-column" text="Date Applied" />
+                                    <TreeTableColumn id="job-title" prefWidth="${application_table.width * 0.35}" styleClass="title-column" text="Job Title" />
+                                    <TreeTableColumn id="company" prefWidth="${application_table.width * 0.35}" styleClass="company-column" text="Company" />
+                                    <TreeTableColumn id="status" prefWidth="${application_table.width * 0.15}" styleClass="status-column" text="Status" />
+                                    <TreeTableColumn id="date-applied" prefWidth="${application_table.width * 0.14685}" styleClass="date-column" text="Applied" />
                                  </columns>
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="15.0" right="15.0" />

@@ -6,7 +6,7 @@
 .main-container{
     -fx-alignment: top-center;
    
-    -fx-background-color: #007CC7;
+    -fx-background-color: #4078ac;
 }
 .form-container{
     -fx-vgap:10px;
@@ -81,3 +81,44 @@
 .place-holder{
     -fx-font-size:25px;
 }
+.tree-table-cell{
+    -fx-alignment: center;
+    -fx-font-size: 15px;
+}
+.tree-table-view .column-header{
+    -fx-background-color: #12232E;
+    -fx-border-color:#12232E;
+}
+.tree-table-view .label{
+    -fx-text-fill: #EEFBFB;
+    -fx-font-size: 15px;
+}
+.title-column{
+    -fx-font-weight:bold;
+}
+.tree-table-view .scroll-bar:horizontal {
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+.tree-table-row-cell {
+    -fx-background-color: -fx-table-cell-border-color, white;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.tree-table-row-cell:selected .tree-table-cell {
+    -fx-background-color:#4078ac, #4078ac;
+    -fx-text-fill: white;
+}
+.tree-table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.tree-table-row-cell:empty .tree-table-cell {
+    -fx-border-width: 0px;
+}
+
