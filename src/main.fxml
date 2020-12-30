@@ -22,7 +22,7 @@
 
 <SplitPane id="split-pane" dividerPositions="0.5" prefHeight="676.0" prefWidth="1199.0" styleClass="split-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
-      <FlowPane maxWidth="350.0" minWidth="350.0" styleClass="main-container" stylesheets="@App.css">
+      <FlowPane id="form-pane" maxWidth="350.0" minWidth="0.0" styleClass="main-container" stylesheets="@App.css">
          <children>
             <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="319.0" prefWidth="364.0" styleClass="landing-container">
                <children>
@@ -123,8 +123,8 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" styleClass="search-container" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
-                                          <ComboBox prefWidth="103.0" promptText="Any">
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="status-text" text="Status" />
+                                          <ComboBox id="status-choice" prefWidth="103.0" promptText="Any">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin></ComboBox>
@@ -135,7 +135,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER_RIGHT" styleClass="search-container" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <TextField prefHeight="27.0" prefWidth="274.0" promptText="Search by Company or Title" />
+                                          <TextField id="search-field" prefHeight="27.0" prefWidth="274.0" promptText="Search by Company or Title" />
                                        </children>
                                        <HBox.margin>
                                           <Insets />

@@ -111,8 +111,9 @@
 }
 
 .tree-table-row-cell:selected .tree-table-cell {
-    -fx-background-color:#4078ac, #4078ac;
-    -fx-text-fill: white;
+    -fx-background-color: -fx-table-cell-border-color, white;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-table-cell-border-color: derive(-fx-color, 5%);
 }
 .tree-table-row-cell:empty {
     -fx-background-color: transparent;
@@ -121,4 +122,14 @@
 .tree-table-row-cell:empty .tree-table-cell {
     -fx-border-width: 0px;
 }
+.status-text{
+    -fx-font-weight:bold;
+    -fx-font-size:15px;
+}
 
+.combo-box .list-view .list-cell:hover{
+    -fx-background-color: #4078ac;
+}
+.combo-box .list-view .cell:selected{
+    -fx-background-color: #4078ac;
+}

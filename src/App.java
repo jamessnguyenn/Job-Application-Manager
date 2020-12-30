@@ -1,5 +1,6 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -23,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
@@ -32,9 +34,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.control.TreeTableColumn.CellEditEvent;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -48,10 +54,12 @@ public class App extends Application {
 	private TextField companyField;
 	private TextArea descriptionField;
 	private TextField linkField;
+	private TextField searchField;
 	private Button submitButton;
 	private JFXTreeTableView<Data> treeTableView;
 	private TreeTableColumn<Data, String> jobTitle, company, status, dateApplied;
 	private ObservableList<Data> data;
+	private ComboBox statusBox;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -65,20 +73,24 @@ public class App extends Application {
 		primaryStage.setY(primaryScreenBounds.getMinY());
 		primaryStage.setWidth(primaryScreenBounds.getWidth());
 		primaryStage.setHeight(primaryScreenBounds.getHeight());
-		primaryStage.show();
+		mainScene.getRoot().applyCss();
 		initializePanes();
-		db.createTable();
 		initializeForm();
+		primaryStage.show();
 		intializeTableElements();
 		initializeTreeTable();
+		intializeTableForm();
 	}
 
 	private void initializePanes() {
 		SplitPane form = (SplitPane) mainScene.lookup("#split-pane");
-		form.lookupAll(".split-pane-divider").stream().forEach(div -> div.setMouseTransparent(true));
+		// form.lookupAll(".split-pane-divider").stream().forEach(div ->
+		// div.setMouseTransparent(true));
 	}
 
 	private void initializeForm() {
+		searchField = (TextField) mainScene.lookup("#search-field");
+		statusBox = (ComboBox) mainScene.lookup("#status-choice");
 		titleField = (TextField) mainScene.lookup("#title-field");
 		companyField = (TextField) mainScene.lookup("#company-field");
 		descriptionField = (TextArea) mainScene.lookup("#description-field");
@@ -100,10 +112,62 @@ public class App extends Application {
 				companyField.clear();
 				descriptionField.clear();
 				linkField.clear();
+				searchField.clear();
+				statusBox.getSelectionModel().selectFirst();
 				db.insertIntoTable(title, company, description, link);
 				reloadData();
 			}
 
+		});
+
+	}
+
+	private void intializeTableForm() {
+		statusBox.getItems().add("Any");
+		statusBox.getItems().add("Pending");
+		statusBox.getItems().add("Accepted");
+		statusBox.getItems().add("Not Considered");
+		statusBox.getSelectionModel().selectFirst();
+		searchField.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				treeTableView.setPredicate(new Predicate<TreeItem<Data>>() {
+
+					@Override
+					public boolean test(TreeItem<Data> data) {
+						if (statusBox.getValue().equals("Any")) {
+							return data.getValue().getCompany().toLowerCase().contains(newValue.toLowerCase())
+									|| data.getValue().getJobTitle().toLowerCase().contains(newValue.toLowerCase());
+						} else {
+							return data.getValue().getStatus().equals(statusBox.getValue()) && (data.getValue()
+									.getCompany().toLowerCase().contains(newValue.toLowerCase())
+									|| data.getValue().getJobTitle().toLowerCase().contains(newValue.toLowerCase()));
+						}
+					}
+
+				});
+
+			}
+
+		});
+		statusBox.getSelectionModel().selectedItemProperty().addListener((options, oldValues, newValue) -> {
+			treeTableView.setPredicate(new Predicate<TreeItem<Data>>() {
+
+				@Override
+				public boolean test(TreeItem<Data> data) {
+					if (newValue.equals("Any")) {
+						return data.getValue().getCompany().toLowerCase().contains(searchField.getText().toLowerCase())
+								|| data.getValue().getJobTitle().toLowerCase()
+										.contains(searchField.getText().toLowerCase());
+					} else {
+						return data.getValue().getStatus().equals(newValue) && (data.getValue().getCompany()
+								.toLowerCase().contains(searchField.getText().toLowerCase())
+								|| data.getValue().getJobTitle().toLowerCase()
+										.contains(searchField.getText().toLowerCase()));
+					}
+				}
+			});
 		});
 
 	}
@@ -159,10 +223,26 @@ public class App extends Application {
 					}
 
 				});
+		ObservableList<String> statusList = FXCollections.observableArrayList();
+		statusList.add("Pending");
+		statusList.add("Accepted");
+		statusList.add("Not Considered");
+		status.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(statusList));
 		data = FXCollections.observableArrayList();
+		status.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<Data, String>>() {
+
+			@Override
+			public void handle(CellEditEvent<Data, String> event) {
+				TreeItem<Data> currentEditedData = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+				currentEditedData.getValue().setStatus(event.getNewValue());
+				db.updateTable(currentEditedData.getValue().getFullDate(), event.getNewValue());
+			}
+			
+		});
 		reloadData();
 		TreeItem<Data> root = new RecursiveTreeItem<Data>(data, RecursiveTreeObject::getChildren);
 		treeTableView.setShowRoot(false);
+		treeTableView.setEditable(true);
 		treeTableView.setRoot(root);
 
 	}
@@ -170,12 +250,13 @@ public class App extends Application {
 	private void reloadData() {
 		data.clear();
 		ResultSet rs = db.getData();
+		
 		if (rs == null) {
 			return;
 		}
 		try {
 			while (rs.next()) {
-				data.add(new Data(rs.getString("job_title"), rs.getString("company"), rs.getString("link"), rs.getString("description"), rs.getString("status"), rs.getString("current_date")));	
+				data.add(new Data(rs.getString("job_title"), rs.getString("company"), rs.getString("link"), rs.getString("description"), rs.getString("status"), rs.getString("date")));	
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
