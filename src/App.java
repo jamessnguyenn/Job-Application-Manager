@@ -125,6 +125,7 @@ public class App extends Application {
 	private void intializeTableForm() {
 		statusBox.getItems().add("Any");
 		statusBox.getItems().add("Pending");
+		statusBox.getItems().add("Interview");
 		statusBox.getItems().add("Accepted");
 		statusBox.getItems().add("Not Considered");
 		statusBox.getSelectionModel().selectFirst();
@@ -225,6 +226,7 @@ public class App extends Application {
 				});
 		ObservableList<String> statusList = FXCollections.observableArrayList();
 		statusList.add("Pending");
+		statusList.add("Interview");
 		statusList.add("Accepted");
 		statusList.add("Not Considered");
 		status.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(statusList));
