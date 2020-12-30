@@ -111,7 +111,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </Text>
-                              <ImageView fitHeight="110.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="117.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@resources/application.png" />
                                  </image>
@@ -124,7 +124,7 @@
                                     <HBox alignment="CENTER_LEFT" styleClass="search-container" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="status-text" text="Status" />
-                                          <ComboBox id="status-choice" prefWidth="103.0" promptText="Any">
+                                          <ComboBox id="status-choice" prefHeight="27.0" prefWidth="104.0" promptText="Any">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin></ComboBox>
@@ -164,7 +164,7 @@
                                     <TreeTableColumn id="date-applied" prefWidth="${application_table.width * 0.14685}" styleClass="date-column" text="Applied" />
                                  </columns>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" left="15.0" right="15.0" />
+                                    <Insets bottom="15.0" left="15.0" right="15.0" />
                                  </VBox.margin>
                               </JFXTreeTableView>
                            </children>

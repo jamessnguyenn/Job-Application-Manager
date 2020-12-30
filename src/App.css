@@ -75,8 +75,8 @@
     -fx-fit-to-height: true;
  }
 .track-title{
-    -fx-font-size:25px;
-    
+    -fx-font-size:27px;
+    -fx-font-weight:bold;
 }
 .place-holder{
     -fx-font-size:25px;
@@ -132,4 +132,7 @@
 }
 .combo-box .list-view .cell:selected{
     -fx-background-color: #4078ac;
+}
+.combo-box{
+    -fx-font-size:14px;
 }
