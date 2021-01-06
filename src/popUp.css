@@ -1,11 +1,12 @@
 .scroll-pane > .viewport {
-    -fx-background-color: transparent;
- }
+ 
+}
  .scroll-pane {
-    -fx-background-color: transparent;
+   
     -fx-fit-to-width: true;
     -fx-fit-to-height: true;
  }
+ 
  .submit-button{
     -fx-background-color:#203647;
     -fx-font-weight: bold;

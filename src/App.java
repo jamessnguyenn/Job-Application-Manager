@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.function.Predicate;
@@ -9,6 +10,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.skins.JFXTableColumnHeader;
 import com.jfoenix.skins.JFXTableHeaderRow;
+import com.sun.prism.paint.Color;
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -28,10 +30,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
@@ -40,8 +44,14 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Shadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -60,11 +70,15 @@ public class App extends Application {
 	private TreeTableColumn<Data, String> jobTitle, company, status, dateApplied;
 	private ObservableList<Data> data;
 	private ComboBox statusBox;
+	private SplitPane form;
+	private static Stage mainStage;
+	private TabPane tabPane;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 		mainScene = new Scene(root);
+		mainStage = primaryStage;
 		primaryStage.setScene(mainScene);
 		primaryStage.setMaximized(true);
 		// primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -83,7 +97,8 @@ public class App extends Application {
 	}
 
 	private void initializePanes() {
-		SplitPane form = (SplitPane) mainScene.lookup("#split-pane");
+		tabPane = (TabPane) mainScene.lookup("#tab-pane");
+		form = (SplitPane) mainScene.lookup("#split-pane");
 		// form.lookupAll(".split-pane-divider").stream().forEach(div ->
 		// div.setMouseTransparent(true));
 	}
@@ -239,6 +254,52 @@ public class App extends Application {
 				currentEditedData.getValue().setStatus(event.getNewValue());
 				db.updateTable(currentEditedData.getValue().getFullDate(), event.getNewValue());
 			}
+
+		});
+		jobTitle.setCellFactory(new Callback<TreeTableColumn<Data, String>, TreeTableCell<Data, String>>() {
+
+			@Override
+			public TreeTableCell<Data, String> call(TreeTableColumn<Data, String> col) {
+				final TreeTableCell<Data, String> cell = new TreeTableCell<Data, String>() {
+					@Override
+					public void updateItem(String jobTitle, boolean empty) {
+						super.updateItem(jobTitle, empty);
+						if (empty) {
+							setText(null);
+						} else {
+							setText(jobTitle);
+						}
+					}
+				};
+				cell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						if (event.getClickCount() > 1) {
+							System.out.println("double click on" + cell.getTreeTableRow().getItem().getFullDate());
+							try {
+								Stage rowView = new Stage();
+								rowView.initOwner(mainStage);
+								Parent root = FXMLLoader.load(getClass().getResource("applications.fxml"));
+								
+								Scene rowScene = new Scene(root);
+								
+								form.setEffect(new GaussianBlur(5));
+								rowView.setScene(rowScene);
+								rowView.initStyle(StageStyle.UNDECORATED);
+								rowView.setWidth(mainStage.getWidth()*0.7);
+								rowView.setHeight(mainStage.getHeight()*0.7);
+								rowView.showAndWait();
+							} catch (IOException e) {
+								System.out.println(e.getMessage());
+							}
+						}
+
+					}
+					
+				});
+				return cell;
+			}
 			
 		});
 		reloadData();
@@ -278,6 +339,9 @@ public class App extends Application {
 
 	}
 	
+	private void initializeRowScene(Scene scene){
+
+	}
 	public static void main(String[] args) {
 		launch(args);
 		
