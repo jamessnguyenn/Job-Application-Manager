@@ -1,0 +1,100 @@
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+ }
+ .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+ }
+ .submit-button{
+    -fx-background-color:#203647;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.submit-button:hover{
+    -fx-background-color: #233b4d;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.submit-button:pressed{
+    -fx-background-color:#32546d;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.delete-button{
+    -fx-background-color:#dd2822;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.delete-button:hover{
+    -fx-background-color: #d9534f;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.delete-button:pressed{
+    -fx-background-color:#d9534f;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:15px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 15px;
+}
+.cancel-button{
+    -fx-font-size:9px;
+    -fx-background-color:transparent;
+    -fx-font-weight: bold;
+    -fx-text-fill:gray;
+    -fx-border-radius:0px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0px;
+}
+.cancel-button:hover{
+    -fx-background-color: #d9534f;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:0px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0px;
+}
+.cancel-button:pressed{
+    -fx-background-color:#d9534f;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill:#EEFBFB;
+    -fx-border-radius:0px;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0px;
+}
+.job-title{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+.company-title{
+    -fx-font-size: 20px;
+}
+.section-title{
+    -fx-font-size: 15px;
+}
+.sub-title{
+    -fx-fill:gray;
+}
