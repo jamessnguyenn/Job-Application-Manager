@@ -129,10 +129,17 @@
 
 .combo-box .list-view .list-cell:hover{
     -fx-background-color: #4078ac;
+    -fx-cursor:hand;
 }
 .combo-box .list-view .cell:selected{
     -fx-background-color: #4078ac;
 }
 .combo-box{
     -fx-font-size:14px;
+}
+.title-column, .status-column{
+    -fx-cursor:hand;
+}
+.title-column:hover, .status-column:hover{
+    -fx-text-fill:#5590b9;
 }

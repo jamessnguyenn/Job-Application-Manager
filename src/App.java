@@ -278,25 +278,30 @@ public class App extends Application {
 
 					@Override
 					public void handle(MouseEvent event) {
-						if (event.getClickCount() > 1) {
+						if (event.getClickCount() >= 1) {
 							System.out.println("double click on" + cell.getTreeTableRow().getItem().getFullDate());
 							try {
-								Stage rowView = new Stage();
-								rowView.initOwner(mainStage);
-								Parent root = FXMLLoader.load(getClass().getResource("applications.fxml"));
-								
-								Scene rowScene = new Scene(root);
-								
 								Distant light = new Distant();
 								light.setColor(Color.web("#4e75a4"));
 								Lighting effect = new Lighting(light);
 								form.setEffect(effect);
+								
+								Stage rowView = new Stage();
+								rowView.initOwner(mainStage);
+								Parent root = FXMLLoader.load(getClass().getResource("applications.fxml"));
+								Scene rowScene = new Scene(root);
 								rowScene.getRoot().applyCss();
 								initializeRowScene(rowScene, cell.getTreeTableRow().getItem());
 								rowView.setScene(rowScene);
 								rowView.initStyle(StageStyle.UNDECORATED);
 								rowView.setWidth(mainStage.getWidth()*0.65);
 								rowView.setHeight(mainStage.getHeight()*0.8);
+								rowView.focusedProperty().addListener((obs, wasFocused, isFocused)->{
+									if(!isFocused){
+										rowView.close();
+										form.setEffect(null);
+									}
+								});
 								rowView.showAndWait();
 							} catch (IOException e) {
 								System.out.println(e.getMessage());

@@ -124,7 +124,7 @@
                                     <HBox alignment="CENTER_LEFT" styleClass="search-container" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="status-text" text="Status" />
-                                          <ComboBox id="status-choice" prefHeight="27.0" prefWidth="104.0" promptText="Any">
+                                          <ComboBox id="status-choice" prefHeight="27.0" prefWidth="150.0" promptText="Any">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin></ComboBox>
