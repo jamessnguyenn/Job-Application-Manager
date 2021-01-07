@@ -32,4 +32,7 @@ public class Data extends RecursiveTreeObject<Data>{
     public void setStatus(String status){
         this.status = new SimpleStringProperty(status);
     }
+    public String getDescription(){
+        return description.getValue();
+    }
 }

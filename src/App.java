@@ -10,7 +10,6 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.skins.JFXTableColumnHeader;
 import com.jfoenix.skins.JFXTableHeaderRow;
-import com.sun.prism.paint.Color;
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -47,9 +46,13 @@ import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
 import javafx.scene.effect.Shadow;
+import javafx.scene.effect.Light.Distant;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -284,11 +287,16 @@ public class App extends Application {
 								
 								Scene rowScene = new Scene(root);
 								
-								form.setEffect(new GaussianBlur(5));
+								Distant light = new Distant();
+								light.setColor(Color.web("#4e75a4"));
+								Lighting effect = new Lighting(light);
+								form.setEffect(effect);
+								rowScene.getRoot().applyCss();
+								initializeRowScene(rowScene, cell.getTreeTableRow().getItem());
 								rowView.setScene(rowScene);
 								rowView.initStyle(StageStyle.UNDECORATED);
-								rowView.setWidth(mainStage.getWidth()*0.7);
-								rowView.setHeight(mainStage.getHeight()*0.7);
+								rowView.setWidth(mainStage.getWidth()*0.65);
+								rowView.setHeight(mainStage.getHeight()*0.8);
 								rowView.showAndWait();
 							} catch (IOException e) {
 								System.out.println(e.getMessage());
@@ -339,8 +347,26 @@ public class App extends Application {
 
 	}
 	
-	private void initializeRowScene(Scene scene){
+	private void initializeRowScene(Scene scene, Data data){
+		Button cancelButton = (Button) scene.lookup("#cancel-button");
+		Text jobTitle = (Text) scene.lookup("#job-title");
+		Text companyTitle = (Text) scene.lookup("#company-title");
+		Text jobDescription = (Text)scene.lookup("#job-description");
+		Text appliedDate = (Text) scene.lookup("#applied-date");
+		jobTitle.setText(data.getJobTitle());
+		companyTitle.setText(data.getCompany());
+		jobDescription.setText(data.getDescription());
+		appliedDate.setText(data.getFullDate());
+		cancelButton.setOnAction(new EventHandler<ActionEvent>(){
 
+			@Override
+			public void handle(ActionEvent arg0) {
+				Stage initializedStage = (Stage)scene.getWindow();
+				initializedStage.close();
+				form.setEffect(null);
+			}
+			
+		});
 	}
 	public static void main(String[] args) {
 		launch(args);
