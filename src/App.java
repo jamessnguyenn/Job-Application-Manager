@@ -316,6 +316,7 @@ public class App extends Application {
 			
 		});
 		reloadData();
+		treeTableView.getSelectionModel().setCellSelectionEnabled(true);
 		TreeItem<Data> root = new RecursiveTreeItem<Data>(data, RecursiveTreeObject::getChildren);
 		treeTableView.setShowRoot(false);
 		treeTableView.setEditable(true);

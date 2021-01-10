@@ -111,7 +111,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </Text>
-                              <ImageView fitHeight="117.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="133.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@resources/application.png" />
                                  </image>

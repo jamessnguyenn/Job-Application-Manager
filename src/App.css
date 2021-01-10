@@ -110,11 +110,11 @@
     -fx-background-insets: 0, 0 0 1 0;
 }
 
-.tree-table-row-cell:selected .tree-table-cell {
+/**.tree-table-row-cell:selected .tree-table-cell {
     -fx-background-color: -fx-table-cell-border-color, white;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-table-cell-border-color: derive(-fx-color, 5%);
-}
+}**/
 .tree-table-row-cell:empty {
     -fx-background-color: transparent;
 }
@@ -134,12 +134,25 @@
 .combo-box .list-view .cell:selected{
     -fx-background-color: #4078ac;
 }
-.combo-box{
+.combo-box, .combo-box:hover{
     -fx-font-size:14px;
+    -fx-background-color: transparent;
 }
 .title-column, .status-column{
     -fx-cursor:hand;
 }
-.title-column:hover, .status-column:hover{
+.title-column:hover{
     -fx-text-fill:#5590b9;
+}
+.title-column:selected, .company-column:selected, .date-column:selected{
+    -fx-background-color: -fx-table-cell-border-color, white;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-text-fill:black;
+    -fx-table-cell-border-color: derive(-fx-color, 5%);
+}
+.status-column:selected{
+    -fx-background-color: -fx-table-cell-border-color, white;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-text-fill:black;
+    -fx-table-cell-border-color: derive(#5590b9, 5%);
 }
